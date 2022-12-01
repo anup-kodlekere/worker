@@ -25,7 +25,7 @@ script:
   - sudo /snap/bin/lxd init --auto
 
   - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
-  
+  - export SNAPCRAFT_BUILD_INFO=1
   - cd ~
   - git clone https://github.com/anup-kodlekere/worker.git
   - cd worker
