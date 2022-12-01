@@ -15,11 +15,11 @@ addons:
     - name: lxd
       channel: stable
 
-before_script:
-  - sudo echo "root:1000000:65536" >> /etc/subgid
-  - sudo echo "root:1000000:65536" >> /etc/subuid
-  - sudo cat /etc/subuid
-  - sudo cat /etc/subgid
+# before_script:
+#   - sudo echo "root:1000000:65536" >> /etc/subgid
+#   - sudo echo "root:1000000:65536" >> /etc/subuid
+#   - sudo cat /etc/subuid
+#   - sudo cat /etc/subgid
   
 script:
   - sudo apt-get update -y 
