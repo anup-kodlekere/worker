@@ -22,6 +22,8 @@ script:
 #  - sudo lxd init --preseed < lxd_preseed.yml
   - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
   
+  - pwd
+  - ls -lha
   - which snapcraft
+  - snapcraft clean
   - snapcraft build
-  - ls
