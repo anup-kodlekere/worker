@@ -3,6 +3,11 @@ jobs:
     - name: VM
       os: linux-ppc64le
       dist: bionic
+      script:
+        - sudo apt-get update -y
+        - sudo apt-get install snapd -y
+        - sudo snap install lxd --channel=5.8/stable
+        - sudo snap install snapcraft --classic
     - name: container
       arch: ppc64le
       dist: focal
