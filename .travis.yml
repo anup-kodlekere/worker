@@ -2,9 +2,14 @@ language: go
 
 go: 1.18.x
 
-arch: ppc64le
-os: linux-ppc64le
-#dist: focal
+jobs:
+  include:
+    - name: VM
+      os: linux-ppc64le
+      dist: focal
+    - name: container
+      arch: ppc64le
+      dist: focal
 
 addons:
   snaps:
