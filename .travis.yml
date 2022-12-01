@@ -39,7 +39,7 @@ script:
 #   - sudo lxd waitready
   - sudo lxd init --auto
   - sudo lxd init --dump
-  - lxc profile set default security.privileged true
+  - sudo lxc profile set default security.privileged true
   - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
   - export SNAPCRAFT_BUILD_INFO=1
   - cd ~
