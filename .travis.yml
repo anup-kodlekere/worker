@@ -28,5 +28,5 @@ script:
   - git checkout deploy_snap
   - pwd
   - ls -lha
-  - which snapcraft
   - snapcraft build
+  - snapcraft
