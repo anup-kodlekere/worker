@@ -24,6 +24,7 @@ script:
 #   - sudo /snap/bin/lxd.migrate -yes
   - sudo lxd waitready
   - sudo lxd init --auto
+  - sudo lxd init --dump
   - lxc profile set default security.privileged true
   - which lxc
   - which lxd
