@@ -46,4 +46,5 @@ script:
   - git clone https://github.com/anup-kodlekere/worker.git
   - cd worker
   - git checkout deploy_snap
+  - sg lxd -c snapcraft
   - sudo snapcraft build --use-lxd
