@@ -23,7 +23,7 @@ before_script:
   
   - cat /etc/subuid > tsubgid
   - sudo echo "root:1000000:65536" >> tsubgid
-  - sudo cp tsubuid /etc/subgid
+  - sudo cp tsubgid /etc/subgid
   - rm -f tsubgid
   
   - sudo cat /etc/subuid
