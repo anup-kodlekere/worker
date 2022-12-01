@@ -17,9 +17,13 @@ addons:
 
 script:
   - sudo apt-get update -y 
+  - sudo apt install snapd
   - sudo snap refresh lxd --channel=5.8/stable
-  - snap list
-  - sudo lxd init --auto
+  - sudo usermod --append --groups lxd $USER
+  - sudo /snap/bin/lxd.migrate -yes
+  - sudo /snap/bin/lxd waitready
+  - sudo /snap/bin/lxd init --auto
+
 #   - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
   
   - cd ~
