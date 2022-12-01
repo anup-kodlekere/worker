@@ -15,6 +15,10 @@ addons:
     - name: lxd
       channel: stable
 
+before_script:
+  - sudo cat /etc/subuid
+  - sudo cat /etc/subgid
+  
 script:
   - sudo apt-get update -y 
 #   - sudo apt-get purge 
