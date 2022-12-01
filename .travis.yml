@@ -24,7 +24,8 @@ dist: focal
 
 before_script:
   - sudo apt-get update -y 
-  - sudo apt-get install make gcc -y
+  - sudo apt-get install snapd
+  - snap list
   - sudo snap install lxd --stable
   - sudo snap install snapcraft --classic
   - lxc version
