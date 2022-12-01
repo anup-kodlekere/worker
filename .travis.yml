@@ -6,7 +6,6 @@ arch: ppc64le
 os: linux
 dist: focal
 
-
 addons:
   snaps:
     - name: snapcraft
@@ -19,7 +18,7 @@ before_script:
   - sudo apt-get update -y 
   - sudo snap refresh lxd --channel=5.8/stable
   - snap list
-  - lxd init
+  - lxd init --preseed < lxd_preseed.yml
 
 script:
   - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
