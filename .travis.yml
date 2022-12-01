@@ -35,8 +35,8 @@ script:
   - sudo apt install snapd
   - sudo snap refresh lxd --channel=5.8/stable
   - sudo usermod --append --groups lxd $USER
-#   - sudo /snap/bin/lxd.migrate -yes
-#   - sudo lxd waitready
+  - sudo /snap/bin/lxd.migrate -yes
+  - sudo lxd waitready
   - sudo lxd init --auto
   - sudo lxd init --dump
   - sudo lxc profile set default security.privileged true
@@ -47,4 +47,4 @@ script:
   - cd worker
   - git checkout deploy_snap
   - sg lxd -c snapcraft
-  - sudo snapcraft build --use-lxd
+#   - sudo snapcraft build --use-lxd
