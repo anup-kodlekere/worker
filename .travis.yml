@@ -2,7 +2,9 @@ language: go
 
 go: 1.18.x
 
-os: linux-ppc64le
+arch: ppc64le
+os: linux
+#os: linux-ppc64le
 
 # env:
 #   global:
