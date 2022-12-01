@@ -1,98 +1,34 @@
 language: go
 
-go: 1.17.x
+go: 1.18.x
 
-dist: xenial
+os: linux-ppc64le
 
-cache:
-  directories:
-  - vendor
-  - $HOME/.cache/go-build
-  - $HOME/gopath/bin
-  - $HOME/gopath/pkg/mod
+# env:
+#   global:
+#   - AMQP_URI="amqp://"
+#   - GOPATH="$HOME/gopath"
+#   - PATH="bin:$HOME/gopath/bin:$HOME/bin:$PATH"
+#   - CHECKOUT_ROOT="$HOME/gopath/src/github.com/travis-ci/worker"
+#   - GO15VENDOREXPERIMENT='1'
+#   - REDIS_URL="redis://"
 
-services:
-- rabbitmq
-- docker
-- redis
+# stages:
+# - test
 
-env:
-  global:
-  - AMQP_URI="amqp://"
-  - GOPATH="$HOME/gopath"
-  - PATH="bin:$HOME/gopath/bin:$HOME/bin:$PATH"
-  - CHECKOUT_ROOT="$HOME/gopath/src/github.com/travis-ci/worker"
-  - GO15VENDOREXPERIMENT='1'
-  - REDIS_URL="redis://"
+# before_cache:
+# - make clean
 
-stages:
-- test
+before_script:
+  - sudo apt-get update -y 
+  - sudo apt-get install make gcc -y
+  - sudo snap install lxd --stable
+  - sudo snap install snapcraft
+  - lxc version
 
-before_cache:
-- make clean
-
-jobs:
-  include:
-  - stage: test
-    name: linux
-    go: 1.17.x
-    script:
-    - make deps
-    - make lintall
-    - GO111MODULE=on make build
-    - mkdir -p build/linux/amd64
-    - cp ${GOPATH%%:*}/bin/travis-worker build/linux/amd64
-    - make test-no-cover
-    - make test-cover
-    - make smoke
-    addons:
-      apt:
-        packages:
-        - rabbitmq-server
-      artifacts:
-        paths:
-        - ./build/linux/amd64/travis-worker
-        target_paths:
-        - travis-ci/worker/$TRAVIS_BUILD_NUMBER/$TRAVIS_JOB_NUMBER
-        - travis-ci/worker/$(git describe --always --dirty --tags)
-        - travis-ci/worker/$TRAVIS_BRANCH
-  - stage: test
-    name: crossbuild
-    go: 1.17.x
-    script:
-    - GO111MODULE=on make build/darwin/amd64/travis-worker
-    addons:
-      artifacts:
-        paths:
-        - ./build/darwin/amd64/travis-worker
-        target_paths:
-        - travis-ci/worker/$TRAVIS_BUILD_NUMBER/$TRAVIS_JOB_NUMBER
-        - travis-ci/worker/$(git describe --always --dirty --tags)
-        - travis-ci/worker/$TRAVIS_BRANCH
-  - stage: test
-    name: docker
-    if: type != 'pull_request' && env(VAULT_PASS) is present && env(VAULT_USERNAME) is present
-    script:
-    - vault login -method=userpass username=$VAULT_USERNAME password=$VAULT_PASS
-    - vault kv get -field=secret gcp/gcr-sa-key > /tmp/gcr_key.json;
-    - gcloud -q auth activate-service-account --key-file /tmp/gcr_key.json;
-    - gcloud -q config set project ${GCE_PROJECT}
-    - gcloud auth configure-docker
-    - make docker-build
-    - make docker-push
-    addons:
-      snaps:
-      - name: google-cloud-sdk
-        confinement: classic
-      - name: vault
-      apt:
-        update: true
-        packages:
-        - docker-ce
-  - stage: test
-    name: http-job-test
-    script:
-    - GO111MODULE=on make build
-    - mkdir -p build/linux/amd64
-    - cp ${GOPATH%%:*}/bin/travis-worker build/linux/amd64
-    - make http-job-test
+script:
+  - |
+    export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
+    snapcraft
+    ls
+    
