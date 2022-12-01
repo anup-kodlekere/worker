@@ -14,13 +14,11 @@ addons:
     - name: lxd
       channel: stable
 
-before_script:
+script:
   - sudo apt-get update -y 
   - sudo snap refresh lxd --channel=5.8/stable
   - snap list
-  - sudo lxd init --preseed < lxd_preseed.yml
-
-script:
+#  - sudo lxd init --preseed < lxd_preseed.yml
   - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
   - snapcraft
   - ls
