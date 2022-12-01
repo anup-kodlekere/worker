@@ -2,7 +2,7 @@ jobs:
   include:
     - name: VM
       os: linux-ppc64le
-      dist: focal
+      dist: bionic
     - name: container
       arch: ppc64le
       dist: focal
