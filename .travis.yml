@@ -24,10 +24,10 @@ script:
   - sudo /snap/bin/lxd waitready
   - sudo /snap/bin/lxd init --auto
 
-#   - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
+  - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
   
   - cd ~
   - git clone https://github.com/anup-kodlekere/worker.git
   - cd worker
   - git checkout deploy_snap
-  - snapcraft build --use-lxd
+  - sudo snapcraft build --use-lxd
