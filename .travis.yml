@@ -22,8 +22,10 @@ script:
 #  - sudo lxd init --preseed < lxd_preseed.yml
   - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
   
+  - cd ~
+  - git clone https://github.com/anup-kodlekere/worker.git
+  - cd worker
   - pwd
   - ls -lha
   - which snapcraft
-  - snapcraft clean
   - snapcraft build
