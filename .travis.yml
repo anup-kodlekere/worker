@@ -22,12 +22,19 @@ dist: focal
 # before_cache:
 # - make clean
 
+
+addons:
+  snaps:
+    - name: snapcraft
+      channel: stable
+      classic: true
+
 before_script:
   - sudo apt-get update -y 
   - sudo apt-get install snapd
   - snap list
+  - snap remove lxd
   - sudo snap install lxd --stable
-  - sudo snap install snapcraft --classic
   - lxc version
 
 script:
