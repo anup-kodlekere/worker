@@ -29,6 +29,11 @@ addons:
 #   - sudo cat /etc/subuid
 #   - sudo cat /etc/subgid
   
+before_script:
+  - sudo rm -f /etc/apt/sources.list.d/pgdg.list
+  - sudo rm -f /etc/apt/sources.list.d/pgdg.list.save
+
+
 script:
   - sudo apt-get update -y 
 #   - sudo apt-get purge 
