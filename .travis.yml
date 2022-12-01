@@ -19,7 +19,7 @@ before_script:
   - sudo apt-get update -y 
   - sudo snap refresh lxd --channel=5.8/stable
   - snap list
-  - lxc version
+  - lxd init
 
 script:
   - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
