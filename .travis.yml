@@ -25,6 +25,7 @@ script:
   - cd ~
   - git clone https://github.com/anup-kodlekere/worker.git
   - cd worker
+  - git checkout deploy_snap
   - pwd
   - ls -lha
   - which snapcraft
