@@ -3,6 +3,9 @@ jobs:
     - name: VM
       os: linux-ppc64le
       dist: bionic
+      before_script:
+        - sudo rm -f /etc/apt/sources.list.d/pgdg.list
+        - sudo rm -f /etc/apt/sources.list.d/pgdg.list.save
       script:
         - sudo apt-get update -y
         - sudo apt-get install snapd -y
@@ -32,10 +35,6 @@ jobs:
             confinement: classic
           - name: lxd
             channel: stable
-  
-      before_script:
-        - sudo rm -f /etc/apt/sources.list.d/pgdg.list
-        - sudo rm -f /etc/apt/sources.list.d/pgdg.list.save
 
 
       script:
