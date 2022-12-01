@@ -30,4 +30,3 @@ script:
   - ls -lha
   - which snapcraft
   - snapcraft build
-  - snapcraft
