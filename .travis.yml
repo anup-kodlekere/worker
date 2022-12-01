@@ -20,10 +20,10 @@ script:
   - sudo snap refresh lxd --channel=5.8/stable
   - snap list
   - sudo lxd init --auto
-  - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
+#   - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
   
   - cd ~
   - git clone https://github.com/anup-kodlekere/worker.git
   - cd worker
   - git checkout deploy_snap
-  - sudo snapcraft build --use-lxd
+  - sudo snapcraft --use-lxd
