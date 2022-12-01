@@ -4,6 +4,7 @@ go: 1.18.x
 
 arch: ppc64le
 os: linux
+dist: focal
 #os: linux-ppc64le
 
 # env:
@@ -25,7 +26,7 @@ before_script:
   - sudo apt-get update -y 
   - sudo apt-get install make gcc -y
   - sudo snap install lxd --stable
-  - sudo snap install snapcraft
+  - sudo snap install snapcraft --classic
   - lxc version
 
 script:
