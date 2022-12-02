@@ -11,9 +11,11 @@ jobs:
         - sudo apt-get install snapd -y
         - sudo snap install lxd --channel=5.8/stable
         - sudo snap install snapcraft --classic
-        - sudo lxd init --auto
+        - sudo /snap/bin/lxd init --auto
         - snap list
-        - lxd init --dump
+        - sudo /snap/bin/lxd.migrate -yes
+        - sudo /snap/bin/lxd waitready
+        - sudo /snap/bin/lxd init --dump
         - sudo lxc profile set default security.privileged true
 
         - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
