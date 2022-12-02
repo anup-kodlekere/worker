@@ -68,6 +68,35 @@ jobs:
         - sudo ufw disable
         - sg lxd -c snapcraft
       #   - sudo snapcraft build --use-lxd
+      
+    - name: remote
+      arch: ppc64le
+      dist: focal
+      addons:
+        snaps:
+          - name: snapcraft
+            channel: stable
+            confinement: classic
+          - name: lxd
+            channel: stable
+
+
+      script:
+        - sudo apt-get update -y 
+        - sudo apt install snapd
+        - sudo snap refresh lxd --channel=5.8/stable
+        - sudo usermod --append --groups lxd $USER
+
+        - sudo lxc profile set default security.privileged true
+
+        - export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
+        - export SNAPCRAFT_BUILD_INFO=1
+
+        - cd ~
+        - git clone https://github.com/anup-kodlekere/worker.git
+        - cd worker
+        - git checkout deploy_snap
+        - snapcraft remote-build --launchpad-accept-public-upload --build-for=ppc64el
 
 
 # before_script:
