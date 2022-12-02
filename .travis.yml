@@ -64,6 +64,8 @@ jobs:
         - git clone https://github.com/anup-kodlekere/worker.git
         - cd worker
         - git checkout deploy_snap
+        - sudo ufw status verbose
+        - sudo ufw disable
         - sg lxd -c snapcraft
       #   - sudo snapcraft build --use-lxd
 
