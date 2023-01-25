@@ -650,7 +650,10 @@ func (p *lxdProvider) Start(ctx gocontext.Context, startAttributes *StartAttribu
 		Name: containerName,
 	}
 	req.Config = config
-
+	
+	// Use ephemeral containers 
+	req.Ephemeral = true
+	
 	if p.pool != "" {
 		req.Devices = map[string]map[string]string{}
 		req.Devices["root"] = map[string]string{}
