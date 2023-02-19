@@ -21,12 +21,29 @@ func NewEnvSelector(c *config.ProviderConfig) (*EnvSelector, error) {
 	return es, nil
 }
 
+// LXD environment does not fully support env-based image selection.
+// The minimal support stops working when the build request provides a group name
+// that contains a `-`. Since the environment variables in bash do not support
+// hypen based delimiting, we need to use a basic find-and-replace scheme to 
+// implement the functionality. 
+
+// The function works on the predicate that the group tag in builds will always
+// have the `power-` keyword prefixed.
+func modifyBuildGroup(group string) string {
+
+	if strings.Contains(group, "group_power_") {
+		return strings.Replace(group, "group_power_", "group_power-", 1)
+	}
+
+	return group
+}
+
 func (es *EnvSelector) buildLookup() {
 	lookup := map[string]string{}
 
 	es.c.Each(func(key, value string) {
 		if strings.HasPrefix(key, "IMAGE_") {
-			lookup[strings.ToLower(strings.Replace(key, "IMAGE_", "", -1))] = value
+			lookup[modifyBuildGroup(strings.ToLower(strings.Replace(key, "IMAGE_", "", -1)))] = value
 		}
 	})
 
