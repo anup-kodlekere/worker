@@ -29,9 +29,9 @@ parts:
       - gcc
     plugin: go
     go-packages:
-      - github.com/travis-ci/worker/cmd/travis-worker
-    go-importpath: github.com/travis-ci/worker
-    go-channel: 1.14/stable
+      - github.com/anup-kodlekere/worker/cmd/travis-worker
+    go-importpath: github.com/anup-kodlekere/worker
+    go-channel: 1.18/stable
     prime:
       - bin/travis-worker
     override-build: |-
@@ -40,7 +40,7 @@ parts:
       cd ${SNAPCRAFT_PROJECT_DIR}
       VERSION="$(git describe --always --dirty --tags 2>/dev/null)"
       REVISION="$(git rev-parse HEAD)"
-      REVISION_URL="https://github.com/travis-ci/worker/tree/${REVISION}"
+      REVISION_URL="https://github.com/anup-kodlekere/worker/tree/${REVISION}"
       GENERATED="$(date -u +'%Y-%m-%dT%H:%M:%S%z')"
       COPYRIGHT="$(grep -i ^copyright LICENSE | sed 's/^[Cc]opyright //')"
 
