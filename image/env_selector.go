@@ -79,27 +79,43 @@ func (es *EnvSelector) buildCandidateKeys(params *Params) []string {
 	hasGroup := params.Group != ""
 	hasOS := params.OS != ""
 
-	if hasDist && hasGroup {
-		candidateKeys = append(candidateKeys, "dist_"+params.Dist+"_group_"+params.Group)
-		candidateKeys = append(candidateKeys, params.Dist+"_"+params.Group)
-	}
+	fmt.Println("BUILD GROUP:", params.Group)
 
+	if hasDist && hasGroup {
+			candidateKeys = append(candidateKeys, "dist_"+params.Dist+"_group_"+params.Group)
+			candidateKeys = append(candidateKeys, params.Dist+"_"+params.Group)
+	}
+/*
 	if hasDist {
-		//candidateKeys = append(candidateKeys, "default_dist_"+params.Dist)
-		candidateKeys = append(candidateKeys, "dist_"+params.Dist)
-		candidateKeys = append(candidateKeys, params.Dist)
+			candidateKeys = append(candidateKeys, "dist_"+params.Dist)
+			candidateKeys = append(candidateKeys, params.Dist)
 	}
 
 	if hasGroup {
-		//candidateKeys = append(candidateKeys, "default_group_"+params.Group)
-		candidateKeys = append(candidateKeys, "group_"+params.Group)
-		candidateKeys = append(candidateKeys, params.Group)
+			candidateKeys = append(candidateKeys, "group_"+params.Group)
+			candidateKeys = append(candidateKeys, params.Group)
 	}
 
 	if hasOS {
-		//candidateKeys = append(candidateKeys, "default_os_"+params.OS)
-		candidateKeys = append(candidateKeys, "os_"+params.OS)
-		candidateKeys = append(candidateKeys, params.OS)
+			candidateKeys = append(candidateKeys, "os_"+params.OS)
+			candidateKeys = append(candidateKeys, params.OS)
+	} */
+
+	if hasGroup {
+			//candidateKeys = append(candidateKeys, "default_group_"+params.Group)
+			candidateKeys = append(candidateKeys, "group_"+params.Group)
+			//candidateKeys = append(candidateKeys, params.Group)
+	}
+	if hasDist {
+			//candidateKeys = append(candidateKeys, "default_dist_"+params.Dist)
+			candidateKeys = append(candidateKeys, "dist_"+params.Dist)
+			//candidateKeys = append(candidateKeys, params.Dist)
+	}
+
+
+	if hasOS {
+			candidateKeys = append(candidateKeys, "os_"+params.OS)
+			candidateKeys = append(candidateKeys, params.OS)
 	}
 
 	return append([]string{strings.Join(fullKey, "_")}, candidateKeys...)
