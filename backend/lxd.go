@@ -652,7 +652,7 @@ func (p *lxdProvider) Start(ctx gocontext.Context, startAttributes *StartAttribu
 	req.Config = config
 	
 	// Use ephemeral containers 
-	req.Ephemeral = true
+	//req.Ephemeral = true
 	
 	if p.pool != "" {
 		req.Devices = map[string]map[string]string{}
