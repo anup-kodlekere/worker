@@ -87,19 +87,19 @@ func (es *EnvSelector) buildCandidateKeys(params *Params) []string {
 	if hasDist {
 		//candidateKeys = append(candidateKeys, "default_dist_"+params.Dist)
 		candidateKeys = append(candidateKeys, "dist_"+params.Dist)
-		//candidateKeys = append(candidateKeys, params.Dist)
+		candidateKeys = append(candidateKeys, params.Dist)
 	}
 
 	if hasGroup {
 		//candidateKeys = append(candidateKeys, "default_group_"+params.Group)
 		candidateKeys = append(candidateKeys, "group_"+params.Group)
-		//candidateKeys = append(candidateKeys, params.Group)
+		candidateKeys = append(candidateKeys, params.Group)
 	}
 
 	if hasOS {
 		//candidateKeys = append(candidateKeys, "default_os_"+params.OS)
 		candidateKeys = append(candidateKeys, "os_"+params.OS)
-		//candidateKeys = append(candidateKeys, params.OS)
+		candidateKeys = append(candidateKeys, params.OS)
 	}
 
 	return append([]string{strings.Join(fullKey, "_")}, candidateKeys...)
