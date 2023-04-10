@@ -79,8 +79,6 @@ func (es *EnvSelector) buildCandidateKeys(params *Params) []string {
 	hasGroup := params.Group != ""
 	hasOS := params.OS != ""
 
-	fmt.Println("BUILD GROUP:", params.Group)
-
 	if hasDist && hasGroup {
 			candidateKeys = append(candidateKeys, "dist_"+params.Dist+"_group_"+params.Group)
 			candidateKeys = append(candidateKeys, params.Dist+"_"+params.Group)
