@@ -651,8 +651,10 @@ func (p *lxdProvider) Start(ctx gocontext.Context, startAttributes *StartAttribu
 	}
 	req.Config = config
 	
-	// Use ephemeral containers 
-	req.Ephemeral = true
+	// Uncomment the below line to use ephemeral containers 
+	// WARNING: Ephemeral containers feature is experimental. It may or may not work as expected, leaving behind traces of the deleted container (allocated IP addresses, storage volumes etc)
+	//          due to improper cleanup.
+	// req.Ephemeral = true
 	
 	if p.pool != "" {
 		req.Devices = map[string]map[string]string{}
